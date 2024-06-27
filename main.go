@@ -20,6 +20,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	fs := http.FileServer(http.Dir("frontend/assets"))
+	mux.Handle("/frontend/assets/", http.StripPrefix("/frontend/assets/", fs))
+
 	mux.HandleFunc("/", indexHandler)
 	http.ListenAndServe(":"+port, mux)
 }
