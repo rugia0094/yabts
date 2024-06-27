@@ -20,9 +20,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	fs := http.FileServer(http.Dir("frontend/dist/assets"))
-	mux.Handle("/frontend/dist/assets/", http.StripPrefix("/frontend/dist/assets/", fs))
+	fs := http.FileServer(http.Dir("frontend/dist"))
+	//mux.Handle("/", http.StripPrefix("/", fs))
 
 	mux.HandleFunc("/", indexHandler)
-	http.ListenAndServe(":"+port, mux)
+	http.ListenAndServe(":"+port, fs)
 }
